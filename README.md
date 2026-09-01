@@ -4,10 +4,9 @@ Reproducibility artifact — notebooks, conversion/deployment scripts, and train
 (LiteRT/TFLite models, metrics CSVs and JSONs) accompanying our benchmarking study of
 compact CNN and vision-transformer backbones for on-device medicinal plant recognition.
 
-<!-- Fill these in once the archive is minted -->
-[![DOI](https://img.shields.io/badge/DOI-pending-lightgrey.svg)](https://doi.org/XX.XXXX/zenodo.XXXXXXX)
 **Archive DOI:** `10.XXXX/zenodo.XXXXXXX` (Zenodo/Figshare — pending)
-**Dataset DOI (Viet Medi Species 2026):** `10.XXXX/zenodo.XXXXXXX` (pending)
+
+**Dataset DOI (Viet Medi Species 2026):** `https://doi.org/10.34740/kaggle/dsv/19337728`
 
 ---
 
@@ -44,22 +43,22 @@ dataset (see [Dataset](#dataset)).
 
 ### `notebooks_n_python_programs/`
 
-| File | Purpose |
-|------|---------|
-| `01-full-vit.ipynb` | Trains the ViT-B/16 reference model that establishes the per-preprocessing accuracy ceiling. |
-| `02-mobile-transformers.ipynb` | Trains and evaluates the three mobile backbones across the four preprocessing pipelines and seeds. |
-| `run_grid.sh` | Driver that runs the full architecture × preprocessing × seed training grid. |
-| `aggregate_preprocessing.py` | Aggregates per-run metrics into `preprocessing_comparison.csv` and computes paired significance (`preprocessing_significance.csv`). |
-| `export_tflite.py` | Baseline PyTorch → LiteRT/TFLite export for the CNN backbones. |
-| `export_softmax_tflite.py` | Appends a softmax head so ML Kit receives a probability distribution (monotonic; argmax/top-k unchanged). |
-| `export_mobilevit_litert.py` | LiteRT export path for MobileViT. |
-| `reexport_mobilevit_nhwc.py` | Wraps MobileViT (NCHW) into an NHWC `[1,224,224,3]` graph required by ML Kit. |
-| `write_metadata.py` | Embeds per-model `NormalizationOptions` (ImageNet stats for the CNNs; plain `/255` for MobileViT). |
-| `make_labels.py` | Emits `labels.txt` in class-index order (sorted class-folder names, filtered to ≥25 images). |
-| `convert_all.sh` | Runs the full export → NHWC → metadata pipeline to produce the shipped models. |
-| `diagnose_tflite.py` | Inspects a `.tflite` graph (I/O tensors, dtypes, ops) for troubleshooting. |
-| `parity_check_deployed.py` | Verifies deployed fp16/fp32 top-1 predictions match the original PyTorch model. |
-| `android_snippet_for_device_latency_tests.txt` | ML Kit snippet used for the on-device latency/RAM/battery measurements. |
+| File                                          | Purpose |
+|-----------------------------------------------|---------|
+| `01-full-vit.ipynb`                           | Trains the ViT-B/16 reference model that establishes the per-preprocessing accuracy ceiling. |
+| `02-mobile-transformers.ipynb`                | Trains and evaluates the three mobile backbones across the four preprocessing pipelines and seeds. |
+| `run_grid.sh`                                 | Driver that runs the full architecture × preprocessing × seed training grid. |
+| `aggregate_preprocessing.py`                  | Aggregates per-run metrics into `preprocessing_comparison.csv` and computes paired significance (`preprocessing_significance.csv`). |
+| `export_tflite.py`                            | Baseline PyTorch → LiteRT/TFLite export for the CNN backbones. |
+| `export_softmax_tflite.py`                    | Appends a softmax head so ML Kit receives a probability distribution (monotonic; argmax/top-k unchanged). |
+| `export_mobilevit_litert.py`                  | LiteRT export path for MobileViT. |
+| `reexport_mobilevit_nhwc.py`                  | Wraps MobileViT (NCHW) into an NHWC `[1,224,224,3]` graph required by ML Kit. |
+| `write_metadata.py`                           | Embeds per-model `NormalizationOptions` (ImageNet stats for the CNNs; plain `/255` for MobileViT). |
+| `make_labels.py`                              | Emits `labels.txt` in class-index order (sorted class-folder names, filtered to ≥25 images). |
+| `convert_all.sh`                              | Runs the full export → NHWC → metadata pipeline to produce the shipped models. |
+| `diagnose_tflite.py`                          | Inspects a `.tflite` graph (I/O tensors, dtypes, ops) for troubleshooting. |
+| `parity_check_deployed.py`                    | Verifies deployed fp16/fp32 top-1 predictions match the original PyTorch model. |
+| `android_snippet_for_device_latency_tests.kt` | ML Kit snippet used for the on-device latency/RAM/battery measurements. |
 
 ### `results_bundle_final/`
 
@@ -72,7 +71,6 @@ Training and deployment outputs, including:
   all from the `baseline`, seed-42 configuration.
 - **`labels.txt`** — the shared 2,721-class label file used by every model.
 
-> Adjust this list to match the exact contents of your archived bundle before publishing.
 
 ---
 
@@ -169,18 +167,7 @@ Training hardware: NVIDIA L40 (46 GB), Rocky Linux 9.8.
 
 ## How to cite
 
-If you use this software or the archived outputs, please cite both the archive and the paper.
-
-```bibtex
-@software{tran_mobile_medherb_benchmark_2026,
-  author  = {Tran, Trien Phat and Ud Din, Fareed and Brankovic, Ljiljana and Sanin, Cesar and Hester, Susan M.},
-  title   = {Mobile Vision-Transformer Benchmark for Fine-Grained Vietnamese Medicinal Plant Classification},
-  year    = {2026},
-  version = {v1.0.0},
-  doi     = {10.XXXX/zenodo.XXXXXXX},
-  url     = {https://doi.org/XX.XXXX/zenodo.XXXXXXX}
-}
-```
+If you use this software or the archived outputs, please cite the paper.
 
 <!-- Replace with the final paper citation once available -->
 > Paper: Tran, T. P., Ud Din, F., Brankovic, L., Sanin, C., & Hester, S. M. (2026).
@@ -191,8 +178,8 @@ If you use this software or the archived outputs, please cite both the archive a
 ## License
 
 <!-- Choose and confirm before publishing -->
-- **Code** (`notebooks_n_python_programs/`): MIT (suggested).
-- **Trained models, metrics, and metadata** (`results_bundle_final/`, CSVs): CC BY 4.0 (suggested).
+- **Code** (`notebooks_n_python_programs/`): MIT.
+- **Trained models, metrics, and metadata** (`results_bundle_final/`, CSVs): CC BY 4.0.
 - The underlying imagery is GBIF-derived and governed by the *Viet Medi Species 2026* dataset
   terms; refer to the dataset record for source attributions and reuse conditions.
 

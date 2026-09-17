@@ -4,7 +4,7 @@ Reproducibility artifact — notebooks, conversion/deployment scripts, and train
 (LiteRT/TFLite models, metrics CSVs and JSONs) accompanying our benchmarking study of
 compact CNN and vision-transformer backbones for on-device medicinal plant recognition.
 
-**Archive DOI:** `https://doi.org/10.5281/zenodo.22226472` 
+**Archive DOI:** `10.XXXX/zenodo.XXXXXXX` (Zenodo/Figshare — pending)
 
 **Dataset DOI (Viet Medi Species 2026):** `https://doi.org/10.34740/kaggle/dsv/19337728`
 
